@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SQAT Summit 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout concept: light, logo-matched canvas. Slanted "folded ribbon" cuts echo the SQAT letterforms; navy bands carry stats and footer; the bug-in-magnifier is the one recurring mark. */
+:root{
+  --paper:#FFFFFF;
+  --mist:#F1F6FF;
+  --ink:#08163A;
+  --ink-2:#4B587A;
+  --blue:#0B63E5;
+  --blue-deep:#0A3FA8;
+  --sky:#1DB4FF;
+  --navy:#06173A;
+  --orange:#F28C38;
+  --line:#D9E4F6;
+  --ok:#0E8F5B;
+  --f-display:'Unbounded','Arial Black',system-ui,sans-serif;
+  --f-body:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--f-body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1160px;margin:0 auto}
+.band{margin-inline:calc(50% - 50vw);padding-inline:max(16px,calc(50vw - 580px))}
+.eyebrow{font:700 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:28px;height:3px;background:var(--orange);transform:skewX(-30deg)}
+.btn{display:inline-flex;align-items:center;gap:10px;font:700 15px/1 var(--f-body);padding:16px 26px;border:0;cursor:pointer;text-decoration:none;color:#fff;background:linear-gradient(100deg,var(--blue-deep),var(--blue) 60%,var(--sky));clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%);transition:filter .2s,transform .2s}
+.btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.btn.ghost{background:var(--ink);}
+.btn.line{background:none;color:var(--ink);box-shadow:none;position:relative}
+.btn.line{clip-path:none;border:2px solid var(--ink);padding:14px 24px}
+.btn.line:hover{background:var(--ink);color:#fff}
+
+/* NAV */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-inline:calc(50% - 50vw);padding-inline:max(16px,calc(50vw - 580px));background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:#fff}
+.nav-in{display:flex;align-items:center;gap:20px;height:68px}
+.nav img{height:42px;width:auto}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0 0 0 auto;padding:0;overflow-x:auto;scrollbar-width:none}
+.nav ul a{display:block;padding:10px 14px;text-decoration:none;font:600 14px var(--f-body);color:var(--ink-2);white-space:nowrap;border-radius:6px}
+.nav ul a:hover{color:var(--blue);background:var(--mist)}
+.nav .btn{padding:12px 20px;font-size:14px;flex:none}
+
+/* HERO */
+.hero{position:relative;padding-block:150px 80px;overflow:hidden}
+.swoosh{position:absolute;left:-2%;top:0;width:104%;height:auto;z-index:0;pointer-events:none}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(40px,7vw,88px);font-weight:800;margin:22px 0 22px;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--blue-deep),var(--blue) 45%,var(--sky));-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.hero h1 .yr{display:block;font-size:.5em;color:var(--ink);letter-spacing:.02em;margin-top:6px}
+.theme{font-size:clamp(17px,2vw,21px);color:var(--ink-2);max-width:34em;border-left:4px solid var(--orange);padding-left:16px}
+.theme b{color:var(--ink)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0}
+.chip{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);padding:10px 16px;background:var(--mist);border:1px solid var(--line);clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);padding-inline:22px}
+.chip i{font:700 11px var(--f-mono);letter-spacing:.1em;color:var(--blue);font-style:normal;text-transform:uppercase}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.org{margin-top:34px;font-size:13px;color:var(--ink-2);max-width:42em}
+
+.ticket{position:relative;background:var(--navy);color:#fff;padding:28px 26px 26px;clip-path:polygon(28px 0,100% 0,calc(100% - 28px) 100%,0 100%);padding-inline:44px;isolation:isolate}
+.ticket::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 260px at 85% 0%,rgba(29,180,255,.35),transparent 70%);z-index:-1}
+.ticket .lens{width:132px;height:132px;margin:-6px auto 6px;display:block}
+.ticket .lbl{font:700 11px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#9CC6FF;text-align:center}
+.count{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0 18px}
+.count div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:12px 4px 8px;text-align:center}
+.count b{display:block;font:700 clamp(24px,4vw,34px)/1 var(--f-display);font-variant-numeric:tabular-nums}
+.count span{font:600 10px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#9CC6FF}
+.ticket .when{text-align:center;font-size:14px;color:#D5E5FF;border-top:1px dashed rgba(255,255,255,.3);padding-top:14px}
+.ticket .when b{color:#fff;display:block;font:700 15px var(--f-display);margin-bottom:4px}
+.ticket .done{display:none;text-align:center;font:700 18px var(--f-display);padding:20px 0}
+
+/* STATS */
+.stats{background:var(--navy);color:#fff;padding-block:44px;position:relative}
+.stats::before,.stats::after{content:"";position:absolute;left:0;right:0;height:26px;background:var(--paper)}
+.stats::before{top:0;clip-path:polygon(0 0,100% 0,100% 0,0 100%)}
+.stats::after{bottom:0;clip-path:polygon(100% 0,100% 100%,0 100%,0 100%)}
+.stats{padding-block:72px}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.stat b{display:block;font:800 clamp(30px,4.6vw,52px)/1 var(--f-display);background:linear-gradient(100deg,#fff,#8FD6FF);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:10px;font-size:14px;color:#BCD3F5;max-width:15em}
+
+/* SECTIONS */
+section{padding-block:88px}
+.sec-head{display:grid;gap:16px;margin-bottom:44px;max-width:44em}
+.sec-head h2{font-size:clamp(28px,4.2vw,46px);font-weight:800}
+.sec-head p{color:var(--ink-2);font-size:18px}
+
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:32px 36px}
+.pillar{border-top:3px solid var(--ink);padding-top:16px}
+.pillar:nth-child(2){border-color:var(--blue)}
+.pillar:nth-child(3){border-color:var(--sky)}
+.pillar:nth-child(4){border-color:var(--orange)}
+.pillar h3{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:0}
+.pillar p{font-size:15px;color:var(--ink-2)}
+.clubs{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.clubs span{font:700 12px var(--f-mono);letter-spacing:.06em;padding:8px 14px;border:1px solid var(--line);background:var(--paper)}
+.clubs-lbl{margin-top:34px;font:700 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+
+/* COMPETITIONS */
+.comp{background:var(--mist);margin-inline:calc(50% - 50vw);padding-inline:max(16px,calc(50vw - 580px))}
+.tabs{display:flex;gap:0;margin-bottom:0;overflow-x:auto;scrollbar-width:none}
+.tab{flex:1 1 0;min-width:190px;text-align:left;border:0;background:#E1ECFC;color:var(--ink-2);padding:20px 24px 18px;cursor:pointer;font:inherit;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 100%,0 100%);margin-right:-12px;position:relative}
+.tab:last-child{clip-path:none;margin-right:0}
+.tab small{display:block;font:700 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.tab strong{font:700 17px var(--f-display);letter-spacing:-.01em;color:inherit}
+.tab[aria-selected="true"]{background:var(--blue);color:#fff;z-index:2}
+.tab[aria-selected="true"] small{color:#BFE3FF}
+.tab:hover:not([aria-selected="true"]){background:#D2E2FA;color:var(--ink)}
+.panel{background:var(--paper);padding:40px;display:grid;grid-template-columns:1.1fr .9fr;gap:44px;border-top:4px solid var(--blue)}
+.panel[hidden]{display:none}
+.panel h3{font-size:clamp(26px,3.6vw,40px);font-weight:800;margin-bottom:6px}
+.panel .sub{font:700 12px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:18px}
+.panel .lede{font-size:18px;color:var(--ink-2);margin-bottom:24px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);margin-bottom:26px}
+.facts div{padding:14px 16px;border-right:1px solid var(--line)}
+.facts div:last-child{border-right:0}
+.facts small{display:block;font:700 10px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.facts b{display:block;font:700 15px var(--f-body);margin-top:4px}
+.list-lbl{font:700 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-bottom:12px}
+.skills{list-style:none;padding:0;margin:0 0 28px;display:grid;gap:10px}
+.skills li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px}
+.skills li::before{content:"";flex:none;width:14px;height:8px;margin-top:8px;background:var(--sky);transform:skewX(-30deg)}
+.prizes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:26px}
+.prize{padding:16px 18px;border:1px solid var(--line);position:relative}
+.prize.first{background:var(--navy);color:#fff;border-color:var(--navy)}
+.prize small{font:700 10px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.prize b{display:block;font:800 26px/1.1 var(--f-display);margin-top:6px;font-variant-numeric:tabular-nums}
+.prize b span{font:600 12px var(--f-mono);opacity:.7;margin-right:6px;letter-spacing:.06em}
+.side{display:flex;flex-direction:column;gap:18px;min-width:0}
+.side-note{font-size:12.5px;color:var(--ink-2)}
+.term{background:var(--navy);color:#DCEBFF;font:500 13.5px/1.7 var(--f-mono);padding:0;overflow:hidden}
+.term-bar{display:flex;gap:6px;padding:12px 14px;background:rgba(255,255,255,.07)}
+.term-bar i{width:10px;height:10px;border-radius:50%;background:#3A5BA0}
+.term-bar i:first-child{background:var(--orange)}
+.term pre{margin:0;padding:18px 20px 22px;white-space:pre-wrap;word-break:break-word;font:inherit}
+.term .k{color:#7DD3FF}.term .o{color:var(--orange)}
+.caret{display:inline-block;width:8px;height:15px;background:var(--sky);vertical-align:-2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.domains{display:grid;grid-template-columns:1fr;gap:10px}
+.dom{display:flex;align-items:center;gap:14px;text-align:left;border:2px solid var(--line);background:var(--paper);padding:14px 16px;cursor:pointer;font:inherit;color:var(--ink);transition:border-color .2s,background .2s}
+.dom:hover{border-color:var(--sky)}
+.dom[aria-pressed="true"]{border-color:var(--blue);background:var(--mist)}
+.dom .dot{flex:none;width:34px;height:34px;display:grid;place-items:center;background:var(--ink);color:#fff;font:700 11px var(--f-mono);clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.dom[aria-pressed="true"] .dot{background:var(--blue)}
+.dom b{display:block;font:700 15px var(--f-body)}
+.dom small{color:var(--ink-2);font-size:13px}
+.dom-detail{background:var(--mist);padding:16px 18px;font-size:15px;border-left:4px solid var(--orange)}
+.flow{display:grid;gap:0}
+.flow div{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:14px 0;border-bottom:1px dashed var(--line)}
+.flow div:last-child{border-bottom:0}
+.flow span{font:800 13px var(--f-mono);color:#fff;background:var(--blue);display:grid;place-items:center;height:32px;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.flow b{display:block;font-size:15.5px}
+.flow p{font-size:14px;color:var(--ink-2)}
+.panel .btn{align-self:flex-start}
+
+/* SCHEDULE */
+.sched{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.half h3{font:700 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);padding-bottom:12px;border-bottom:3px solid var(--ink);margin-bottom:6px;display:flex;justify-content:space-between}
+.slot{display:grid;grid-template-columns:104px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}
+.slot time{font:700 13px/1.4 var(--f-mono);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.slot time span{display:block;font-weight:500;opacity:.7}
+.slot h4{margin:0 0 4px;font:700 17px/1.3 var(--f-body)}
+.slot p{font-size:14.5px;color:var(--ink-2)}
+.slot.hot{background:linear-gradient(90deg,var(--mist),transparent);border-left:4px solid var(--blue);padding-left:14px;margin-left:-4px}
+.slot.hot time{color:var(--blue)}
+.tag{display:inline-block;font:700 10px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;margin:8px 6px 0 0;background:var(--blue);color:#fff;text-decoration:none}
+.tag:hover{background:var(--ink)}
+
+/* PRIZES */
+.prize-band{background:var(--navy);color:#fff;position:relative;padding-block:96px}
+.prize-band .eyebrow{color:#8FD6FF}
+.prize-band .sec-head p{color:#BCD3F5}
+.pool{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.pool-card{border:1px solid rgba(255,255,255,.18);padding:26px;background:rgba(255,255,255,.04);display:flex;flex-direction:column;gap:18px;min-width:0}
+.pool-card h3{font-size:20px;font-weight:700}
+.pool-card .rows{display:grid;gap:8px}
+.pool-card .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px dashed rgba(255,255,255,.2);padding-bottom:8px;font-size:14.5px;color:#D5E5FF}
+.pool-card .row b{font:700 20px var(--f-display);color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pool-card .row b small{font:600 11px var(--f-mono);opacity:.7;margin-right:4px}
+.pool-total{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px 30px;align-items:baseline;justify-content:space-between;border-top:3px solid var(--orange);padding-top:22px}
+.pool-total b{font:800 clamp(34px,5vw,56px)/1 var(--f-display);background:linear-gradient(100deg,#fff,#8FD6FF);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.pool-total span{color:#BCD3F5;font-size:15px}
+.perks{margin-top:30px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.perks div{font-size:14.5px;color:#D5E5FF;padding-top:12px;border-top:1px solid rgba(255,255,255,.25)}
+.perks b{display:block;color:#fff;margin-bottom:4px;font-size:15.5px}
+
+/* REGISTER (opens the Google Form) */
+.reg{background:var(--mist);margin-inline:calc(50% - 50vw);padding-inline:max(16px,calc(50vw - 580px))}
+.reg-card{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center;text-decoration:none;background:var(--paper);border-top:5px solid var(--orange);padding:48px;transition:transform .25s,box-shadow .25s;cursor:pointer}
+.reg-card:hover{transform:translateY(-4px);box-shadow:0 26px 50px -26px rgba(8,22,58,.4)}
+.reg-card h2{font-size:clamp(28px,4.2vw,46px);font-weight:800;margin:16px 0}
+.reg-card p.lead{color:var(--ink-2);font-size:18px;max-width:30em}
+.reg-tracks{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.reg-tracks span{font:700 12px var(--f-mono);letter-spacing:.06em;padding:8px 14px;border:1px solid var(--line);background:var(--mist)}
+.reg-go{display:grid;gap:16px;justify-items:start;background:var(--navy);color:#fff;padding:36px 44px;clip-path:polygon(24px 0,100% 0,calc(100% - 24px) 100%,0 100%);position:relative;isolation:isolate}
+.reg-go::before{content:"";position:absolute;inset:0;background:radial-gradient(320px 200px at 90% 0%,rgba(29,180,255,.35),transparent 70%);z-index:-1}
+.reg-go .k{font:700 11px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#9CC6FF}
+.reg-go b{font:800 clamp(24px,3vw,32px)/1.1 var(--f-display)}
+.reg-go small{font-size:13px;color:#BCD3F5}
+.reg-go .btn{background:linear-gradient(100deg,var(--orange),#FFB066);color:var(--ink)}
+.daysleft{text-align:center;font:700 15px var(--f-display);color:#fff;margin:-4px 0 16px;letter-spacing:0}
+
+/* FOOTER */
+footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-inline:max(16px,calc(50vw - 580px));padding-block:64px 36px;position:relative}
+.foot{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:44px}
+.foot img{height:92px;width:auto;filter:brightness(0) invert(1);margin-bottom:18px}
+.foot p{color:#BCD3F5;font-size:14.5px}
+.foot h4{font:700 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#8FD6FF;margin:0 0 14px}
+.foot .c{display:grid;gap:4px;font-size:15px;color:#E5EFFF}
+.foot .c b{font-size:16px;color:#fff}
+.copy{display:inline-flex;align-items:center;gap:8px;margin-top:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;font:600 13px var(--f-body);padding:8px 12px;cursor:pointer;width:fit-content}
+.copy:hover{background:rgba(255,255,255,.2)}
+.legal{margin-top:44px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:#9FBAE6}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:#fff;font:600 14px var(--f-body);padding:12px 20px;opacity:0;pointer-events:none;transition:.25s;z-index:50;max-width:calc(100vw - 32px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* motion: one load sequence, visible at rest */
+@media (prefers-reduced-motion:no-preference){
+  .hero-grid>*{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+  .hero-grid>*:nth-child(2){animation-delay:.15s}
+  .swoosh path{animation:sweep 1.4s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+  @keyframes sweep{from{opacity:0;transform:translateX(-6%)}to{opacity:1;transform:none}}
+}
+
+/* RESPONSIVE */
+@media(max-width:980px){
+  .hero{padding-block:120px 64px}
+  .hero-grid,.about,.panel,.sched,.reg-card,.foot{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .pool{grid-template-columns:1fr}
+  .perks{grid-template-columns:1fr 1fr}
+  .nav ul{display:none}
+  .nav .btn{margin-left:auto}
+  section{padding-block:64px}
+  .ticket{max-width:520px}
+}
+@media(max-width:620px){
+  .hero{padding-block:84px 56px}
+  .pillars,.prizes{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr}
+  .facts div{border-right:0;border-bottom:1px solid var(--line)}
+  .facts div:last-child{border-bottom:0}
+  .panel{padding:24px 20px}
+  .tab{min-width:150px;padding:16px}
+  .tab strong{font-size:14px}
+  .slot{grid-template-columns:1fr;gap:6px}
+  .slot.hot{margin-left:0}
+  .perks{grid-template-columns:1fr}
+  .reg-card{padding:28px 20px}
+  .reg-go{padding-inline:36px}
+  .ticket{padding-inline:30px}
+}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1DB4FF"/><stop offset="1" stop-color="#0A3FA8"/></linearGradient>
+    <symbol id="bug" viewBox="0 0 64 64">
+      <g fill="currentColor" stroke="currentColor">
+        <ellipse cx="32" cy="38" rx="13" ry="17" stroke="none"/>
+        <circle cx="32" cy="17" r="6.5" stroke="none"/>
+        <path d="M28 12 22 4M36 12 42 4" fill="none" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M20 32 9 27M19 41 8 42M21 50 11 57M44 32 55 27M45 41 56 42M43 50 53 57" fill="none" stroke-width="2.6" stroke-linecap="round"/>
+      </g>
+      <path d="M32 24v30" stroke="var(--bug-cut,#0B63E5)" stroke-width="2"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="top">
+  <div class="nav-in">
+    <a href="#top" aria-label="SQAT home"><img src="assets/logo-word.png" alt="SQAT – Software Quality Assurance and Testing Club" width="148" height="42"></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#competitions">Competitions</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#prizes">Prizes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn js-form" href="#register">Register</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero band">
+    <svg class="swoosh" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 78C340 30 760 6 1270 14L1360 10 1292 40C800 26 380 52 0 78Z" fill="url(#gBlue)"/>
+    </svg>
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">1st edition · Daffodil International University</p>
+        <h1><em>SQAT</em> Summit<span class="yr">2026</span></h1>
+        <p class="theme"><b>Quality, Security &amp; AI:</b> Shaping the Future of Software Engineering</p>
+        <div class="meta">
+          <span class="chip"><i>Date</i> Wed, 18 Nov 2026</span>
+          <span class="chip"><i>Venue</i> Daffodil Smart City, Birulia</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn js-form" href="#register">Register for a track</a>
+          <a class="btn line" href="#competitions">See competitions</a>
+        </div>
+        <p class="org">Organized by the SQAT Lab, SQAT Club and the Department of Software Engineering, in collaboration with leading DIU student clubs.</p>
+      </div>
+      <div class="ticket" aria-label="Countdown to SQAT Summit 2026">
+        <svg class="lens" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="86" cy="86" r="62" fill="none" stroke="#1DB4FF" stroke-width="16"/>
+          <circle cx="86" cy="86" r="48" fill="#0B63E5"/>
+          <path d="M132 132 176 176" stroke="#1DB4FF" stroke-width="20" stroke-linecap="butt"/>
+          <use href="#bug" x="54" y="54" width="64" height="64" style="color:#fff;--bug-cut:#0B63E5"/>
+        </svg>
+        <p class="lbl" id="cdLbl">Doors open in</p>
+        <div class="count" id="count">
+          <div><b id="cd-d">--</b><span>Days</span></div>
+          <div><b id="cd-h">--</b><span>Hours</span></div>
+          <div><b id="cd-m">--</b><span>Min</span></div>
+          <div><b id="cd-s">--</b><span>Sec</span></div>
+        </div>
+        <p class="daysleft" id="dl">Counting down to 18 November</p>
+        <p class="done" id="cdDone">The summit is live.</p>
+        <p class="when"><b>09:00 AM · Check-in &amp; inauguration</b>Closing and prize ceremony at 05:00 PM</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats band" aria-label="Summit at a glance">
+    <div class="stat-grid">
+      <div class="stat"><b data-n="450">450+</b><span>competitors across the tracks</span></div>
+      <div class="stat"><b data-n="1200">1,200+</b><span>visitors expected at the exhibition</span></div>
+      <div class="stat"><b data-n="300">300+</b><span>career-seeking finalists in the room</span></div>
+      <div class="stat"><b data-n="10">10+</b><span>external industry judges and session chairs</span></div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="about">
+      <div class="sec-head" style="margin:0">
+        <p class="eyebrow">About the summit</p>
+        <h2>Where testers, builders and prompt engineers meet.</h2>
+        <p>SQAT Summit brings software engineering students together for one day of live competition around automated quality assurance, secure engineering and applied generative AI. Industry judges watch the work, and the best teams get noticed.</p>
+        <div>
+          <p class="clubs-lbl">In collaboration with</p>
+          <div class="clubs"><span>DIU CPC</span><span>Cyber Security Club</span><span>Robotics Club</span><span>AI Club</span></div>
+        </div>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><h3>Talent pipeline</h3><p>Employers screen, mentor and recruit top software engineering students for internships and jobs.</p></div>
+        <div class="pillar"><h3>Real-world rigor</h3><p>Go past coursework: defect hunting, automated test suites and enterprise-style QA pipelines.</p></div>
+        <div class="pillar"><h3>Generative AI</h3><p>Prompt engineering, algorithmic reasoning and AI-assisted testing for how software ships today.</p></div>
+        <div class="pillar"><h3>Across departments</h3><p>Computing clubs from programming, cyber security, robotics and AI share one stage.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="comp band" id="competitions" style="padding-block:88px">
+    <div class="sec-head">
+      <p class="eyebrow">Core competitions</p>
+      <h2>Three ways to compete.</h2>
+      <p>Pick the track that fits how you work. Every track is judged live by a technical jury from industry.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Competitions">
+      <button class="tab" role="tab" id="t-prompt" aria-controls="p-prompt" aria-selected="true"><small>Phase 1 · Morning</small><strong>Prompt Battle</strong></button>
+      <button class="tab" role="tab" id="t-project" aria-controls="p-project" aria-selected="false" tabindex="-1"><small>Phase 2 · Afternoon</small><strong>Project Showcasing</strong></button>
+      <button class="tab" role="tab" id="t-video" aria-controls="p-video" aria-selected="false" tabindex="-1"><small>Phase 2 · Afternoon</small><strong>AI Video Making</strong></button>
+    </div>
+
+    <!-- PROMPT BATTLE -->
+    <div class="panel" role="tabpanel" id="p-prompt" aria-labelledby="t-prompt">
+      <div>
+        <h3>Prompt Battle</h3>
+        <p class="sub">Applied Generative AI</p>
+        <p class="lede">Get the best answer out of an LLM before the clock runs out. You are judged on how well your prompts reason, constrain and optimize the output.</p>
+        <div class="facts">
+          <div><small>When</small><b>11:15 AM – 01:00 PM</b></div>
+          <div><small>Expected</small><b>120+ prompt engineers</b></div>
+          <div><small>Format</small><b>Timed, live rounds</b></div>
+        </div>
+        <p class="list-lbl">What gets tested</p>
+        <ul class="skills">
+          <li>Context engineering</li>
+          <li>Few-shot prompting</li>
+          <li>Algorithmic logic</li>
+          <li>LLM output optimization under time pressure</li>
+        </ul>
+        <div class="prizes">
+          <div class="prize first"><small>Champion</small><b><span>BDT</span>5,000</b></div>
+          <div class="prize"><small>Runner-up</small><b><span>BDT</span>3,000</b></div>
+        </div>
+        <a class="btn js-form" href="#register">Join Prompt Battle</a>
+      </div>
+      <div class="side">
+        <div class="term" aria-label="Illustrative round brief">
+          <div class="term-bar"><i></i><i></i><i></i></div>
+<pre><span class="k">ROUND</span>  02 / sample
+<span class="k">BRIEF</span>  Test plan for a login form, JSON only.
+<span class="k">LIMIT</span>  120 tokens
+<span class="k">CLOCK</span>  <span class="o">07:30</span>
+
+<span class="k">&gt;</span> your prompt goes here<span class="caret"></span></pre>
+        </div>
+        <p class="side-note">Illustrative round layout. Official rules and rounds are announced by the organizers.</p>
+        <p class="dom-detail"><b>Why partners watch this track:</b> it shows who can reason clearly, use AI tools well and stay productive under pressure.</p>
+      </div>
+    </div>
+
+    <!-- PROJECT SHOWCASING -->
+    <div class="panel" role="tabpanel" id="p-project" aria-labelledby="t-project">
+      <div>
+        <h3>Project Showcasing</h3>
+        <p class="sub">Enterprise software innovation</p>
+        <p class="lede">Demo a product you built to a jury of industry engineers. Full-stack apps, secure architecture and automated tests are what stand out.</p>
+        <div class="facts">
+          <div><small>When</small><b>02:00 – 03:30 PM</b></div>
+          <div><small>Expected</small><b>150+ innovators</b></div>
+          <div><small>Format</small><b>Live demo + jury Q&amp;A</b></div>
+        </div>
+        <p class="list-lbl">What the jury looks for</p>
+        <ul class="skills">
+          <li>A deployable product that works in front of them</li>
+          <li>Secure, well-structured architecture</li>
+          <li>Automated testing built into the project</li>
+        </ul>
+        <div class="prizes" id="projPrizes">
+          <div class="prize first"><small>Champion · <span class="dn">Web / Mobile</span></small><b><span>BDT</span>12,000</b></div>
+          <div class="prize"><small>Runner-up · <span class="dn">Web / Mobile</span></small><b><span>BDT</span>8,000</b></div>
+        </div>
+        <a class="btn js-form" href="#register">Join Project Showcasing</a>
+      </div>
+      <div class="side">
+        <p class="list-lbl" style="margin:0">Choose your domain</p>
+        <div class="domains" role="group" aria-label="Project domain">
+          <button class="dom" data-dom="web" aria-pressed="true"><span class="dot">W</span><span><b>Web / Mobile</b><small>Apps people open every day</small></span></button>
+          <button class="dom" data-dom="sys" aria-pressed="false"><span class="dot">S</span><span><b>System / Cloud</b><small>Backends, infrastructure, services</small></span></button>
+          <button class="dom" data-dom="ai" aria-pressed="false"><span class="dot">AI</span><span><b>AI / ML</b><small>Models and AI-powered products</small></span></button>
+        </div>
+        <p class="dom-detail" id="domDetail">Web and mobile apps with a real user flow, secure sign-in and a test suite you can run live.</p>
+        <p class="side-note">Each domain has its own champion and runner-up.</p>
+      </div>
+    </div>
+
+    <!-- AI VIDEO -->
+    <div class="panel" role="tabpanel" id="p-video" aria-labelledby="t-video">
+      <div>
+        <h3>AI Video Making</h3>
+        <p class="sub">Creative multimedia AI</p>
+        <p class="lede">Explain a software engineering idea in a short film made with AI. Your video is screened to the audience and the jury on the big stage.</p>
+        <div class="facts">
+          <div><small>When</small><b>02:00 – 03:30 PM</b></div>
+          <div><small>Expected</small><b>80+ tech creators</b></div>
+          <div><small>Format</small><b>Public screening</b></div>
+        </div>
+        <p class="list-lbl">What you will show</p>
+        <ul class="skills">
+          <li>Storyboarding that carries a clear idea</li>
+          <li>AI video synthesis done with care</li>
+          <li>Software engineering principles told as a story</li>
+        </ul>
+        <div class="prizes">
+          <div class="prize first"><small>Champion</small><b><span>BDT</span>5,000</b></div>
+          <div class="prize"><small>Runner-up</small><b><span>BDT</span>3,000</b></div>
+        </div>
+        <a class="btn js-form" href="#register">Join AI Video Making</a>
+      </div>
+      <div class="side">
+        <p class="list-lbl" style="margin:0">From idea to screen</p>
+        <div class="flow">
+          <div><span>01</span><span><b>Script</b><p>Pick one software engineering principle and the story that explains it.</p></span></div>
+          <div><span>02</span><span><b>Storyboard</b><p>Plan every shot before you generate anything.</p></span></div>
+          <div><span>03</span><span><b>Generate</b><p>Create scenes, voice and motion with AI tools.</p></span></div>
+          <div><span>04</span><span><b>Screen</b><p>Your film plays live in front of the jury and the audience.</p></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="schedule">
+    <div class="sec-head">
+      <p class="eyebrow">Event day · Wednesday 18 November</p>
+      <h2>Eight hours, one packed program.</h2>
+      <p>From check-in to trophies. Competition slots are highlighted.</p>
+    </div>
+    <div class="sched">
+      <div class="half">
+        <h3><span>Morning</span><span>09:00 – 01:00</span></h3>
+        <div class="slot"><time>09:00 – 09:30</time><div><h4>Check-in and inaugural ceremony</h4><p>Opening addresses by DIU leadership and the summit convener.</p></div></div>
+        <div class="slot"><time>09:30 – 10:15</time><div><h4>Keynote: Future of Quality, Security &amp; AI</h4><p>Delivered by an executive from our principal partner.</p></div></div>
+        <div class="slot"><time>10:15 – 11:00</time><div><h4>Industry–academia roundtable</h4><p>Enterprise QA, CI/CD pipelines and GenAI, with department heads on the panel.</p></div></div>
+        <div class="slot"><time>11:00 – 11:15</time><div><h4>Networking and press photo session</h4><p>Official media documentation with university dignitaries.</p></div></div>
+        <div class="slot hot"><time>11:15 – 01:00<span>Phase 1</span></time><div><h4>Core competition: Prompt Battle</h4><p>Generative AI and algorithmic logic, live.</p><a class="tag" href="#competitions" data-open="prompt">Prompt Battle details</a></div></div>
+      </div>
+      <div class="half">
+        <h3><span>Afternoon</span><span>01:00 – 05:00</span></h3>
+        <div class="slot"><time>01:00 – 02:00</time><div><h4>Networking lunch, prayer and exhibition</h4><p>Meet partners at their stalls and pavilions.</p></div></div>
+        <div class="slot hot"><time>02:00 – 03:30<span>Phase 2</span></time><div><h4>Core competitions: Showcase and Video screenings</h4><p>Enterprise software demos and AI video screenings run in this window.</p><a class="tag" href="#competitions" data-open="project">Project Showcasing</a><a class="tag" href="#competitions" data-open="video">AI Video Making</a></div></div>
+        <div class="slot"><time>03:30 – 04:15</time><div><h4>Corporate spotlight and recruitment talk</h4><p>Tech stack, engineering culture and career paths for 300+ finalists.</p></div></div>
+        <div class="slot"><time>04:15 – 04:30</time><div><h4>Judges' scoring and tabulation</h4><p>Marks from the technical jury are consolidated.</p></div></div>
+        <div class="slot"><time>04:30 – 05:00</time><div><h4>Valedictory and prize distribution</h4><p>Trophies, certificates and closing remarks.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="prize-band band" id="prizes">
+    <div class="sec-head">
+      <p class="eyebrow">Prize pool</p>
+      <h2>Real prizes for real work.</h2>
+      <p>Every track pays out a champion and a runner-up, plus certificates for all participants.</p>
+    </div>
+    <div class="pool">
+      <div class="pool-card">
+        <h3>Prompt Battle</h3>
+        <div class="rows">
+          <div class="row"><span>Champion</span><b><small>BDT</small>5,000</b></div>
+          <div class="row"><span>Runner-up</span><b><small>BDT</small>3,000</b></div>
+        </div>
+      </div>
+      <div class="pool-card">
+        <h3>Project Showcasing</h3>
+        <div class="rows">
+          <div class="row"><span>Champion, each domain</span><b><small>BDT</small>12,000</b></div>
+          <div class="row"><span>Runner-up, each domain</span><b><small>BDT</small>8,000</b></div>
+        </div>
+      </div>
+      <div class="pool-card">
+        <h3>AI Video Making</h3>
+        <div class="rows">
+          <div class="row"><span>Champion</span><b><small>BDT</small>5,000</b></div>
+          <div class="row"><span>Runner-up</span><b><small>BDT</small>3,000</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="pool-total"><b>BDT 76,000</b><span>across these three tracks, with Project Showcasing across 3 domains</span></div>
+    <div class="perks">
+      <div><b>Certificates</b>Embossed certificates of achievement for participants.</div>
+      <div><b>Crests and trophies</b>Glass trophies handed over on stage at the valedictory.</div>
+      <div><b>Summit kit</b>Official T-shirt, folder, notebook and souvenirs for delegates.</div>
+      <div><b>Industry eyes</b>Partner companies scout finalists across every track.</div>
+    </div>
+  </div>
+
+  <div class="reg band" id="register" style="padding-block:88px">
+    <a class="reg-card js-form" href="#register" aria-label="Open the registration Google Form">
+      <div>
+        <p class="eyebrow">Register</p>
+        <h2>Claim your seat in the arena.</h2>
+        <p class="lead">Choose your competition and register through our Google Form. One click takes you there.</p>
+        <div class="reg-tracks"><span>Prompt Battle</span><span>Project Showcasing</span><span>AI Video Making</span></div>
+      </div>
+      <div class="reg-go">
+        <span class="k">Registration</span>
+        <b>Open the Google Form</b>
+        <span class="btn">Register now</span>
+        <small>Opens in a new tab</small>
+      </div>
+    </a>
+  </div>
+</main>
+
+<footer id="contact">
+  <div class="foot">
+    <div>
+      <img src="assets/logo-full.png" alt="SQAT logo" width="272" height="92">
+      <p>1st SQAT Summit 2026. Organized by the Software Quality Assurance and Testing Lab and Club, Department of Software Engineering, Daffodil International University.</p>
+    </div>
+    <div>
+      <h4>Event convener</h4>
+      <div class="c"><b>Md. Suhag Ali</b><span>Senior Lecturer, Dept. of Software Engineering</span><span>Convener, SQAT Club</span><span id="mail">suhag.swe@diu.edu.bd</span><span id="ph">+880 1303-382828</span></div>
+      <button class="copy" type="button" data-copy="suhag.swe@diu.edu.bd">Copy email</button>
+      <button class="copy" type="button" data-copy="+880 1303-382828">Copy phone</button>
+    </div>
+    <div>
+      <h4>Venue and department</h4>
+      <div class="c"><b>Daffodil Smart City</b><span>Birulia, Savar, Dhaka-1216</span><span>Wednesday, 18 November 2026</span><span>swe.daffodilvarsity.edu.bd</span><span>+880 1847-140000</span></div>
+    </div>
+  </div>
+  <div class="legal"><span>© 2026 SQAT Lab &amp; SQAT Club, DIU</span><span>Quality · Security · AI</span></div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  /* =====================================================================
+     SETTINGS: paste your Google Form link between the quotes below.
+     Every Register button on the page (and the whole Register card)
+     will open it in a new tab.
+     ===================================================================== */
+  var GOOGLE_FORM_URL = "PASTE_YOUR_GOOGLE_FORM_LINK_HERE";
+
+  /* Summit start: 18 Nov 2026, 09:00 AM Dhaka time (UTC+6) */
+  var EVENT_START = Date.UTC(2026, 10, 18, 3, 0, 0);
+  var EVENT_DAY   = Date.UTC(2026, 10, 18);
+
+  function $(s,r){return (r||document).querySelector(s)}
+  function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+  function safe(fn){try{fn()}catch(e){if(window.console)console.error(e)}}
+  function toast(m){var t=$('#toast');if(!t)return;t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('on')},3200)}
+  function pad(n){return (n<10?'0':'')+n}
+
+  /* ---------- live countdown ---------- */
+  safe(function(){
+    function tick(){
+      var now=Date.now(), d=EVENT_START-now;
+      var dhakaToday=Math.floor((now+6*3600000)/86400000)*86400000;
+      var days=Math.round((EVENT_DAY-dhakaToday)/86400000);
+      var dl=$('#dl');
+      if(d<=0){
+        $('#count').style.display='none';$('#cdLbl').style.display='none';
+        $('#cdDone').style.display='block';
+        $('#cdDone').textContent=days<0?'Thank you for joining SQAT Summit 2026.':'The summit is live.';
+        if(dl)dl.style.display='none';
+        return;
+      }
+      var s=Math.floor(d/1000);
+      $('#cd-d').textContent=pad(Math.floor(s/86400));
+      $('#cd-h').textContent=pad(Math.floor(s%86400/3600));
+      $('#cd-m').textContent=pad(Math.floor(s%3600/60));
+      $('#cd-s').textContent=pad(s%60);
+      if(dl)dl.textContent=days>1?days+' days to go until 18 November':days===1?'Tomorrow is the day':'Today is the day';
+    }
+    tick();setInterval(tick,1000);
+  });
+
+  /* ---------- stats count-up ---------- */
+  safe(function(){
+    var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+    function fmt(n){return n.toLocaleString('en-US')+'+'}
+    $$('.stat b').forEach(function(el){
+      var n=+el.getAttribute('data-n'); el.textContent=fmt(n);
+      if(reduce||!('IntersectionObserver' in window))return;
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){
+        if(!e.isIntersecting)return; io.disconnect();
+        var t0=performance.now();
+        (function step(t){var p=Math.min(1,(t-t0)/1100);el.textContent=fmt(Math.round(n*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(step)})(t0);
+      })},{threshold:.6});
+      io.observe(el);
+    });
+  });
+
+  /* ---------- competition tabs ---------- */
+  safe(function(){
+    var tabs=$$('.tab');
+    function openTab(id,focus){
+      tabs.forEach(function(t){var on=t.id==='t-'+id;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;if(on&&focus)t.focus()});
+      $$('.panel').forEach(function(p){p.hidden=(p.id!=='p-'+id)});
+    }
+    tabs.forEach(function(t,i){
+      t.addEventListener('click',function(){openTab(t.id.slice(2))});
+      t.addEventListener('keydown',function(e){
+        var k=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0; if(!k)return;
+        e.preventDefault(); openTab(tabs[(i+k+tabs.length)%tabs.length].id.slice(2),true);
+      });
+    });
+    $$('[data-open]').forEach(function(a){a.addEventListener('click',function(){openTab(a.getAttribute('data-open'))})});
+    openTab('prompt');
+  });
+
+  /* ---------- project domains ---------- */
+  safe(function(){
+    var doms={
+      web:['Web / Mobile','Web and mobile apps with a real user flow, secure sign-in and a test suite you can run live.'],
+      sys:['System / Cloud','Backend systems, infrastructure and cloud services that stay reliable under load and are tested end to end.'],
+      ai:['AI / ML','Applied models and AI-powered products with results the jury can measure.']
+    };
+    function setDom(k){
+      $$('.dom').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-dom')===k?'true':'false')});
+      $('#domDetail').textContent=doms[k][1];
+      $$('#projPrizes .dn').forEach(function(s){s.textContent=doms[k][0]});
+    }
+    $$('.dom').forEach(function(b){b.addEventListener('click',function(){setDom(b.getAttribute('data-dom'))})});
+  });
+
+  /* ---------- Google Form links ---------- */
+  safe(function(){
+    var ok=/^https:\/\//.test(GOOGLE_FORM_URL);
+    $$('.js-form').forEach(function(a){
+      if(ok){a.href=GOOGLE_FORM_URL;a.target='_blank';a.rel='noopener noreferrer'}
+      else a.addEventListener('click',function(e){e.preventDefault();toast('Registration link is not added yet. Paste the Google Form link in the script settings.')});
+    });
+  });
+
+  /* ---------- copy buttons ---------- */
+  safe(function(){
+    $$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){
+      var v=b.getAttribute('data-copy');
+      if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(v).then(function(){toast('Copied '+v)},function(){toast('Select the text and copy it manually.')});
+      else toast('Select the text and copy it manually.');
+    })});
+  });
+})();
+</script>
+
+</body>
+</html>
