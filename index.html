@@ -4,10 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SQAT Summit 2026</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-/* Layout concept: light, logo-matched canvas. Slanted "folded ribbon" cuts echo the SQAT letterforms; navy bands carry stats and footer; the bug-in-magnifier is the one recurring mark. */
+/* Layout concept: light, logo-matched canvas. Slanted "folded ribbon" cuts echo the SQAT letterforms; navy bands carry the prize pool and footer; the bug-in-magnifier is the one recurring mark. */
 :root{
   --paper:#FFFFFF;
   --mist:#F1F6FF;
@@ -82,16 +81,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ticket .when b{color:#fff;display:block;font:700 15px var(--f-display);margin-bottom:4px}
 .ticket .done{display:none;text-align:center;font:700 18px var(--f-display);padding:20px 0}
 
-/* STATS */
-.stats{background:var(--navy);color:#fff;padding-block:44px;position:relative}
-.stats::before,.stats::after{content:"";position:absolute;left:0;right:0;height:26px;background:var(--paper)}
-.stats::before{top:0;clip-path:polygon(0 0,100% 0,100% 0,0 100%)}
-.stats::after{bottom:0;clip-path:polygon(100% 0,100% 100%,0 100%,0 100%)}
-.stats{padding-block:72px}
-.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.stat b{display:block;font:800 clamp(30px,4.6vw,52px)/1 var(--f-display);background:linear-gradient(100deg,#fff,#8FD6FF);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
-.stat span{display:block;margin-top:10px;font-size:14px;color:#BCD3F5;max-width:15em}
-
 /* SECTIONS */
 section{padding-block:88px}
 .sec-head{display:grid;gap:16px;margin-bottom:44px;max-width:44em}
@@ -109,6 +98,8 @@ section{padding-block:88px}
 .clubs{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
 .clubs span{font:700 12px var(--f-mono);letter-spacing:.06em;padding:8px 14px;border:1px solid var(--line);background:var(--paper)}
 .clubs-lbl{margin-top:34px;font:700 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.clubs .logo{display:inline-flex;align-items:center;padding:8px 14px}
+.clubs .logo img{height:92px;width:auto;margin:-28px -18px}
 
 /* COMPETITIONS */
 .comp{background:var(--mist);margin-inline:calc(50% - 50vw);padding-inline:max(16px,calc(50vw - 580px))}
@@ -150,14 +141,6 @@ section{padding-block:88px}
 .term .k{color:#7DD3FF}.term .o{color:var(--orange)}
 .caret{display:inline-block;width:8px;height:15px;background:var(--sky);vertical-align:-2px;animation:blink 1s steps(2) infinite}
 @keyframes blink{50%{opacity:0}}
-.domains{display:grid;grid-template-columns:1fr;gap:10px}
-.dom{display:flex;align-items:center;gap:14px;text-align:left;border:2px solid var(--line);background:var(--paper);padding:14px 16px;cursor:pointer;font:inherit;color:var(--ink);transition:border-color .2s,background .2s}
-.dom:hover{border-color:var(--sky)}
-.dom[aria-pressed="true"]{border-color:var(--blue);background:var(--mist)}
-.dom .dot{flex:none;width:34px;height:34px;display:grid;place-items:center;background:var(--ink);color:#fff;font:700 11px var(--f-mono);clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
-.dom[aria-pressed="true"] .dot{background:var(--blue)}
-.dom b{display:block;font:700 15px var(--f-body)}
-.dom small{color:var(--ink-2);font-size:13px}
 .dom-detail{background:var(--mist);padding:16px 18px;font-size:15px;border-left:4px solid var(--orange)}
 .flow{display:grid;gap:0}
 .flow div{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:14px 0;border-bottom:1px dashed var(--line)}
@@ -166,6 +149,17 @@ section{padding-block:88px}
 .flow b{display:block;font-size:15.5px}
 .flow p{font-size:14px;color:var(--ink-2)}
 .panel .btn{align-self:flex-start}
+.fee{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;background:var(--mist);border-left:4px solid var(--orange);padding:14px 18px;margin-bottom:26px}
+.fee small{flex-basis:100%;font:700 10px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.fee b{font:800 24px/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.fee b span{font:600 12px var(--f-mono);opacity:.7;margin-right:6px}
+.fee em{font-style:normal;font-size:14.5px;color:var(--ink-2)}
+.fee .off{flex-basis:100%;font-size:14.5px;color:var(--ok);font-weight:700}
+
+/* RULEBOOK */
+.rules-card{display:flex;flex-wrap:wrap;gap:24px 44px;align-items:center;justify-content:space-between;border-left:5px solid var(--orange);background:var(--mist);padding:36px 40px}
+.rules-card h2{font-size:clamp(24px,3.4vw,36px);font-weight:800;margin:14px 0 10px}
+.rules-card p.lead{color:var(--ink-2);font-size:17px;max-width:32em}
 
 /* SCHEDULE */
 .sched{display:grid;grid-template-columns:1fr 1fr;gap:48px}
@@ -241,7 +235,6 @@ footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-
 @media(max-width:980px){
   .hero{padding-block:120px 64px}
   .hero-grid,.about,.panel,.sched,.reg-card,.foot{grid-template-columns:1fr}
-  .stat-grid{grid-template-columns:1fr 1fr}
   .pool{grid-template-columns:1fr}
   .perks{grid-template-columns:1fr 1fr}
   .nav ul{display:none}
@@ -264,11 +257,11 @@ footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-
   .reg-card{padding:28px 20px}
   .reg-go{padding-inline:36px}
   .ticket{padding-inline:30px}
+  .rules-card{padding:28px 22px}
 }
 </style>
 </head>
 <body>
-
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -292,6 +285,7 @@ footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-
       <li><a href="#about">About</a></li>
       <li><a href="#competitions">Competitions</a></li>
       <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#rulebook">Rulebook</a></li>
       <li><a href="#prizes">Prizes</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -340,15 +334,6 @@ footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-
     </div>
   </div>
 
-  <div class="stats band" aria-label="Summit at a glance">
-    <div class="stat-grid">
-      <div class="stat"><b data-n="450">450+</b><span>competitors across the tracks</span></div>
-      <div class="stat"><b data-n="1200">1,200+</b><span>visitors expected at the exhibition</span></div>
-      <div class="stat"><b data-n="300">300+</b><span>career-seeking finalists in the room</span></div>
-      <div class="stat"><b data-n="10">10+</b><span>external industry judges and session chairs</span></div>
-    </div>
-  </div>
-
   <section id="about">
     <div class="about">
       <div class="sec-head" style="margin:0">
@@ -357,7 +342,7 @@ footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-
         <p>SQAT Summit brings software engineering students together for one day of live competition around automated quality assurance, secure engineering and applied generative AI. Industry judges watch the work, and the best teams get noticed.</p>
         <div>
           <p class="clubs-lbl">In collaboration with</p>
-          <div class="clubs"><span>DIU CPC</span><span>Cyber Security Club</span><span>Robotics Club</span><span>AI Club</span></div>
+          <div class="clubs"><span class="logo"><img src="assets/images.png" alt="Software Engineering Club (SEC)" height="92"></span><span class="logo"><img src="assets/images.jfif" alt="Data Science Club" height="92"></span><span>Cyber Security Club</span></div>
         </div>
       </div>
       <div class="pillars">
@@ -377,28 +362,65 @@ footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-
     </div>
 
     <div class="tabs" role="tablist" aria-label="Competitions">
-      <button class="tab" role="tab" id="t-prompt" aria-controls="p-prompt" aria-selected="true"><small>Phase 1 · Morning</small><strong>Prompt Battle</strong></button>
-      <button class="tab" role="tab" id="t-project" aria-controls="p-project" aria-selected="false" tabindex="-1"><small>Phase 2 · Afternoon</small><strong>Project Showcasing</strong></button>
-      <button class="tab" role="tab" id="t-video" aria-controls="p-video" aria-selected="false" tabindex="-1"><small>Phase 2 · Afternoon</small><strong>AI Video Making</strong></button>
+      <button class="tab" role="tab" id="t-project" aria-controls="p-project" aria-selected="true"><small>Phase 2 · Afternoon</small><strong>Project Showcasing</strong></button>
+      <button class="tab" role="tab" id="t-prompt" aria-controls="p-prompt" aria-selected="false" tabindex="-1"><small>Phase 1 · Morning</small><strong>AI Prompt Battle – Video Making</strong></button>
+      <button class="tab" role="tab" id="t-bug" aria-controls="p-bug" aria-selected="false" tabindex="-1"><small>Phase 2 · Afternoon</small><strong>Logical Bug Hunting</strong></button>
     </div>
 
-    <!-- PROMPT BATTLE -->
+    <!-- PROJECT SHOWCASING -->
+    <div class="panel" role="tabpanel" id="p-project" aria-labelledby="t-project">
+      <div>
+        <h3>Project Showcasing</h3>
+        <p class="sub">Enterprise software innovation</p>
+        <p class="lede">Demo a product you built to a jury of industry engineers. Working software, secure structure and automated tests are what stand out.</p>
+        <div class="facts">
+          <div><small>When</small><b>02:00 – 03:30 PM</b></div>
+          <div><small>Team size</small><b>Up to 3 members</b></div>
+          <div><small>Format</small><b>Live demo + jury Q&amp;A</b></div>
+        </div>
+        <div class="fee"><small>Registration fee</small><b><span>BDT</span>1,000</b><em>per group</em></div>
+        <p class="list-lbl">What the jury looks for</p>
+        <ul class="skills">
+          <li>A product that works in front of them</li>
+          <li>Secure, well-structured architecture</li>
+          <li>Automated testing built into the project</li>
+        </ul>
+        <div class="prizes">
+          <div class="prize first"><small>Champion</small><b><span>BDT</span>12,000</b></div>
+          <div class="prize"><small>Runner-up</small><b><span>BDT</span>8,000</b></div>
+          <div class="prize"><small>3rd to 5th place (total)</small><b><span>BDT</span>6,000</b></div>
+        </div>
+        <a class="btn js-form" href="#register">Join Project Showcasing</a>
+      </div>
+      <div class="side">
+        <p class="list-lbl" style="margin:0">How it runs</p>
+        <div class="flow">
+          <div><span>01</span><span><b>Build</b><p>Bring a working project. Any kind of project is welcome.</p></span></div>
+          <div><span>02</span><span><b>Demo</b><p>Show it live to the jury.</p></span></div>
+          <div><span>03</span><span><b>Defend</b><p>Answer questions from industry engineers.</p></span></div>
+        </div>
+        <p class="dom-detail">Prizes go to the top 5 projects, 1st to 5th place. All projects are judged together.</p>
+      </div>
+    </div>
+
+    <!-- AI PROMPT BATTLE - VIDEO MAKING -->
     <div class="panel" role="tabpanel" id="p-prompt" aria-labelledby="t-prompt">
       <div>
-        <h3>Prompt Battle</h3>
-        <p class="sub">Applied Generative AI</p>
-        <p class="lede">Get the best answer out of an LLM before the clock runs out. You are judged on how well your prompts reason, constrain and optimize the output.</p>
+        <h3>AI Prompt Battle – Video Making</h3>
+        <p class="sub">Generative AI and creative multimedia</p>
+        <p class="lede">Write prompts that get an AI to make a short video explaining a software engineering idea. You are judged on how well your prompts reason, constrain and direct the result.</p>
         <div class="facts">
           <div><small>When</small><b>11:15 AM – 01:00 PM</b></div>
-          <div><small>Expected</small><b>120+ prompt engineers</b></div>
-          <div><small>Format</small><b>Timed, live rounds</b></div>
+          <div><small>Entry</small><b>Per participant</b></div>
+          <div><small>Format</small><b>Timed rounds + screening</b></div>
         </div>
+        <div class="fee"><small>Registration fee</small><b><span>BDT</span>300</b><em>per participant</em><span class="off">SQAT members get BDT 50 off and pay BDT 250.</span></div>
         <p class="list-lbl">What gets tested</p>
         <ul class="skills">
-          <li>Context engineering</li>
-          <li>Few-shot prompting</li>
-          <li>Algorithmic logic</li>
-          <li>LLM output optimization under time pressure</li>
+          <li>Context engineering and few-shot prompting</li>
+          <li>Storyboarding a clear idea before generating</li>
+          <li>AI video synthesis done with care</li>
+          <li>Software engineering principles told as a story</li>
         </ul>
         <div class="prizes">
           <div class="prize first"><small>Champion</small><b><span>BDT</span>5,000</b></div>
@@ -410,83 +432,52 @@ footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-
         <div class="term" aria-label="Illustrative round brief">
           <div class="term-bar"><i></i><i></i><i></i></div>
 <pre><span class="k">ROUND</span>  02 / sample
-<span class="k">BRIEF</span>  Test plan for a login form, JSON only.
+<span class="k">BRIEF</span>  Explain code review in a 30-second AI video.
 <span class="k">LIMIT</span>  120 tokens
 <span class="k">CLOCK</span>  <span class="o">07:30</span>
 
 <span class="k">&gt;</span> your prompt goes here<span class="caret"></span></pre>
         </div>
         <p class="side-note">Illustrative round layout. Official rules and rounds are announced by the organizers.</p>
-        <p class="dom-detail"><b>Why partners watch this track:</b> it shows who can reason clearly, use AI tools well and stay productive under pressure.</p>
+        <p class="dom-detail"><b>Why partners watch this track:</b> it shows who can reason clearly, use AI tools well and tell an idea on screen.</p>
       </div>
     </div>
 
-    <!-- PROJECT SHOWCASING -->
-    <div class="panel" role="tabpanel" id="p-project" aria-labelledby="t-project">
+    <!-- LOGICAL BUG HUNTING -->
+    <div class="panel" role="tabpanel" id="p-bug" aria-labelledby="t-bug">
       <div>
-        <h3>Project Showcasing</h3>
-        <p class="sub">Enterprise software innovation</p>
-        <p class="lede">Demo a product you built to a jury of industry engineers. Full-stack apps, secure architecture and automated tests are what stand out.</p>
+        <h3>Logical Bug Hunting</h3>
+        <p class="sub">Debugging and program logic</p>
+        <p class="lede">Every round gives you a different problem and a program that is meant to solve it. The code runs, but the answers are wrong. Find the logical bug.</p>
         <div class="facts">
           <div><small>When</small><b>02:00 – 03:30 PM</b></div>
-          <div><small>Expected</small><b>150+ innovators</b></div>
-          <div><small>Format</small><b>Live demo + jury Q&amp;A</b></div>
+          <div><small>Entry</small><b>Per participant</b></div>
+          <div><small>Format</small><b>Different problem each round</b></div>
         </div>
-        <p class="list-lbl">What the jury looks for</p>
+        <div class="fee"><small>Registration fee</small><b><span>BDT</span>100</b><em>per participant</em></div>
+        <p class="list-lbl">What gets tested</p>
         <ul class="skills">
-          <li>A deployable product that works in front of them</li>
-          <li>Secure, well-structured architecture</li>
-          <li>Automated testing built into the project</li>
-        </ul>
-        <div class="prizes" id="projPrizes">
-          <div class="prize first"><small>Champion · <span class="dn">Web / Mobile</span></small><b><span>BDT</span>12,000</b></div>
-          <div class="prize"><small>Runner-up · <span class="dn">Web / Mobile</span></small><b><span>BDT</span>8,000</b></div>
-        </div>
-        <a class="btn js-form" href="#register">Join Project Showcasing</a>
-      </div>
-      <div class="side">
-        <p class="list-lbl" style="margin:0">Choose your domain</p>
-        <div class="domains" role="group" aria-label="Project domain">
-          <button class="dom" data-dom="web" aria-pressed="true"><span class="dot">W</span><span><b>Web / Mobile</b><small>Apps people open every day</small></span></button>
-          <button class="dom" data-dom="sys" aria-pressed="false"><span class="dot">S</span><span><b>System / Cloud</b><small>Backends, infrastructure, services</small></span></button>
-          <button class="dom" data-dom="ai" aria-pressed="false"><span class="dot">AI</span><span><b>AI / ML</b><small>Models and AI-powered products</small></span></button>
-        </div>
-        <p class="dom-detail" id="domDetail">Web and mobile apps with a real user flow, secure sign-in and a test suite you can run live.</p>
-        <p class="side-note">Each domain has its own champion and runner-up.</p>
-      </div>
-    </div>
-
-    <!-- AI VIDEO -->
-    <div class="panel" role="tabpanel" id="p-video" aria-labelledby="t-video">
-      <div>
-        <h3>AI Video Making</h3>
-        <p class="sub">Creative multimedia AI</p>
-        <p class="lede">Explain a software engineering idea in a short film made with AI. Your video is screened to the audience and the jury on the big stage.</p>
-        <div class="facts">
-          <div><small>When</small><b>02:00 – 03:30 PM</b></div>
-          <div><small>Expected</small><b>80+ tech creators</b></div>
-          <div><small>Format</small><b>Public screening</b></div>
-        </div>
-        <p class="list-lbl">What you will show</p>
-        <ul class="skills">
-          <li>Storyboarding that carries a clear idea</li>
-          <li>AI video synthesis done with care</li>
-          <li>Software engineering principles told as a story</li>
+          <li>Reading unfamiliar code quickly</li>
+          <li>Spotting wrong conditions, off-by-one errors and bad loop limits</li>
+          <li>Proving a bug with a failing test case</li>
         </ul>
         <div class="prizes">
-          <div class="prize first"><small>Champion</small><b><span>BDT</span>5,000</b></div>
-          <div class="prize"><small>Runner-up</small><b><span>BDT</span>3,000</b></div>
+          <div class="prize first"><small>Champion</small><b><span>BDT</span>2,000</b></div>
+          <div class="prize"><small>Runner-up</small><b><span>BDT</span>1,000</b></div>
         </div>
-        <a class="btn js-form" href="#register">Join AI Video Making</a>
+        <a class="btn js-form" href="#register">Join Logical Bug Hunting</a>
       </div>
       <div class="side">
-        <p class="list-lbl" style="margin:0">From idea to screen</p>
-        <div class="flow">
-          <div><span>01</span><span><b>Script</b><p>Pick one software engineering principle and the story that explains it.</p></span></div>
-          <div><span>02</span><span><b>Storyboard</b><p>Plan every shot before you generate anything.</p></span></div>
-          <div><span>03</span><span><b>Generate</b><p>Create scenes, voice and motion with AI tools.</p></span></div>
-          <div><span>04</span><span><b>Screen</b><p>Your film plays live in front of the jury and the audience.</p></span></div>
+        <div class="term" aria-label="Illustrative bug hunting problem">
+          <div class="term-bar"><i></i><i></i><i></i></div>
+<pre><span class="k">PROBLEM</span>  Sum of all even numbers from 1 to n
+<span class="k">SYMPTOM</span>  n = 6 prints 9, expected 12
+
+for i in range(1, n):   <span class="o"># stops at n-1</span>
+    if i % 2 == 1:      <span class="o"># odd, not even</span>
+        total += i<span class="caret"></span></pre>
         </div>
+        <p class="side-note">Illustrative problem. Official problems are revealed on the day.</p>
       </div>
     </div>
   </div>
@@ -504,12 +495,12 @@ footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-
         <div class="slot"><time>09:30 – 10:15</time><div><h4>Keynote: Future of Quality, Security &amp; AI</h4><p>Delivered by an executive from our principal partner.</p></div></div>
         <div class="slot"><time>10:15 – 11:00</time><div><h4>Industry–academia roundtable</h4><p>Enterprise QA, CI/CD pipelines and GenAI, with department heads on the panel.</p></div></div>
         <div class="slot"><time>11:00 – 11:15</time><div><h4>Networking and press photo session</h4><p>Official media documentation with university dignitaries.</p></div></div>
-        <div class="slot hot"><time>11:15 – 01:00<span>Phase 1</span></time><div><h4>Core competition: Prompt Battle</h4><p>Generative AI and algorithmic logic, live.</p><a class="tag" href="#competitions" data-open="prompt">Prompt Battle details</a></div></div>
+        <div class="slot hot"><time>11:15 – 01:00<span>Phase 1</span></time><div><h4>Core competition: AI Prompt Battle – Video Making</h4><p>Generative AI prompting and AI video creation, live.</p><a class="tag" href="#competitions" data-open="prompt">Prompt Battle – Video Making</a></div></div>
       </div>
       <div class="half">
         <h3><span>Afternoon</span><span>01:00 – 05:00</span></h3>
         <div class="slot"><time>01:00 – 02:00</time><div><h4>Networking lunch, prayer and exhibition</h4><p>Meet partners at their stalls and pavilions.</p></div></div>
-        <div class="slot hot"><time>02:00 – 03:30<span>Phase 2</span></time><div><h4>Core competitions: Showcase and Video screenings</h4><p>Enterprise software demos and AI video screenings run in this window.</p><a class="tag" href="#competitions" data-open="project">Project Showcasing</a><a class="tag" href="#competitions" data-open="video">AI Video Making</a></div></div>
+        <div class="slot hot"><time>02:00 – 03:30<span>Phase 2</span></time><div><h4>Core competitions: Project Showcasing and Logical Bug Hunting</h4><p>Enterprise software demos and logical bug hunting run in this window.</p><a class="tag" href="#competitions" data-open="project">Project Showcasing</a><a class="tag" href="#competitions" data-open="bug">Logical Bug Hunting</a></div></div>
         <div class="slot"><time>03:30 – 04:15</time><div><h4>Corporate spotlight and recruitment talk</h4><p>Tech stack, engineering culture and career paths for 300+ finalists.</p></div></div>
         <div class="slot"><time>04:15 – 04:30</time><div><h4>Judges' scoring and tabulation</h4><p>Marks from the technical jury are consolidated.</p></div></div>
         <div class="slot"><time>04:30 – 05:00</time><div><h4>Valedictory and prize distribution</h4><p>Trophies, certificates and closing remarks.</p></div></div>
@@ -517,36 +508,48 @@ footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-
     </div>
   </section>
 
+  <section id="rulebook" style="padding-block:0 88px">
+    <div class="rules-card">
+      <div>
+        <p class="eyebrow">Rulebook</p>
+        <h2>Read the rules before you register.</h2>
+        <p class="lead">Rules and judging details for all three competitions are in the rulebook.</p>
+      </div>
+      <a class="btn js-rulebook" href="#rulebook">Open the rulebook</a>
+    </div>
+  </section>
+
   <div class="prize-band band" id="prizes">
     <div class="sec-head">
       <p class="eyebrow">Prize pool</p>
       <h2>Real prizes for real work.</h2>
-      <p>Every track pays out a champion and a runner-up, plus certificates for all participants.</p>
+      <p>Cash prizes for the top teams and participants in every competition, plus certificates for all participants.</p>
     </div>
     <div class="pool">
       <div class="pool-card">
-        <h3>Prompt Battle</h3>
-        <div class="rows">
-          <div class="row"><span>Champion</span><b><small>BDT</small>5,000</b></div>
-          <div class="row"><span>Runner-up</span><b><small>BDT</small>3,000</b></div>
-        </div>
-      </div>
-      <div class="pool-card">
         <h3>Project Showcasing</h3>
         <div class="rows">
-          <div class="row"><span>Champion, each domain</span><b><small>BDT</small>12,000</b></div>
-          <div class="row"><span>Runner-up, each domain</span><b><small>BDT</small>8,000</b></div>
+          <div class="row"><span>Champion</span><b><small>BDT</small>12,000</b></div>
+          <div class="row"><span>Runner-up</span><b><small>BDT</small>8,000</b></div>
+          <div class="row"><span>3rd to 5th place (total)</span><b><small>BDT</small>6,000</b></div>
         </div>
       </div>
       <div class="pool-card">
-        <h3>AI Video Making</h3>
+        <h3>AI Prompt Battle – Video Making</h3>
         <div class="rows">
           <div class="row"><span>Champion</span><b><small>BDT</small>5,000</b></div>
           <div class="row"><span>Runner-up</span><b><small>BDT</small>3,000</b></div>
+        </div>
+      </div>
+      <div class="pool-card">
+        <h3>Logical Bug Hunting</h3>
+        <div class="rows">
+          <div class="row"><span>Champion</span><b><small>BDT</small>2,000</b></div>
+          <div class="row"><span>Runner-up</span><b><small>BDT</small>1,000</b></div>
         </div>
       </div>
     </div>
-    <div class="pool-total"><b>BDT 76,000</b><span>across these three tracks, with Project Showcasing across 3 domains</span></div>
+    <div class="pool-total"><b>BDT 37,000</b><span>total prize pool across all three competitions</span></div>
     <div class="perks">
       <div><b>Certificates</b>Embossed certificates of achievement for participants.</div>
       <div><b>Crests and trophies</b>Glass trophies handed over on stage at the valedictory.</div>
@@ -561,7 +564,7 @@ footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-
         <p class="eyebrow">Register</p>
         <h2>Claim your seat in the arena.</h2>
         <p class="lead">Choose your competition and register through our Google Form. One click takes you there.</p>
-        <div class="reg-tracks"><span>Prompt Battle</span><span>Project Showcasing</span><span>AI Video Making</span></div>
+        <div class="reg-tracks"><span>Project Showcasing · BDT 1,000 per group</span><span>AI Prompt Battle – Video Making · BDT 300 (SQAT members BDT 250)</span><span>Logical Bug Hunting · BDT 100</span></div>
       </div>
       <div class="reg-go">
         <span class="k">Registration</span>
@@ -597,11 +600,12 @@ footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-
 <script>
 (function(){
   /* =====================================================================
-     SETTINGS: paste your Google Form link between the quotes below.
-     Every Register button on the page (and the whole Register card)
-     will open it in a new tab.
+     SETTINGS: paste your Google Form links between the quotes below.
+     GOOGLE_FORM_URL: every Register button on the page.
+     RULEBOOK_URL:    the Open the rulebook button.
      ===================================================================== */
-  var GOOGLE_FORM_URL = "PASTE_YOUR_GOOGLE_FORM_LINK_HERE";
+  var GOOGLE_FORM_URL = "https://forms.gle/u53ZZfEcZATNKcMZ6";
+  var RULEBOOK_URL = "";
 
   /* Summit start: 18 Nov 2026, 09:00 AM Dhaka time (UTC+6) */
   var EVENT_START = Date.UTC(2026, 10, 18, 3, 0, 0);
@@ -637,22 +641,6 @@ footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-
     tick();setInterval(tick,1000);
   });
 
-  /* ---------- stats count-up ---------- */
-  safe(function(){
-    var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
-    function fmt(n){return n.toLocaleString('en-US')+'+'}
-    $$('.stat b').forEach(function(el){
-      var n=+el.getAttribute('data-n'); el.textContent=fmt(n);
-      if(reduce||!('IntersectionObserver' in window))return;
-      var io=new IntersectionObserver(function(es){es.forEach(function(e){
-        if(!e.isIntersecting)return; io.disconnect();
-        var t0=performance.now();
-        (function step(t){var p=Math.min(1,(t-t0)/1100);el.textContent=fmt(Math.round(n*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(step)})(t0);
-      })},{threshold:.6});
-      io.observe(el);
-    });
-  });
-
   /* ---------- competition tabs ---------- */
   safe(function(){
     var tabs=$$('.tab');
@@ -668,22 +656,16 @@ footer{background:var(--navy);color:#fff;margin-inline:calc(50% - 50vw);padding-
       });
     });
     $$('[data-open]').forEach(function(a){a.addEventListener('click',function(){openTab(a.getAttribute('data-open'))})});
-    openTab('prompt');
+    openTab('project');
   });
 
-  /* ---------- project domains ---------- */
+  /* ---------- Rulebook link ---------- */
   safe(function(){
-    var doms={
-      web:['Web / Mobile','Web and mobile apps with a real user flow, secure sign-in and a test suite you can run live.'],
-      sys:['System / Cloud','Backend systems, infrastructure and cloud services that stay reliable under load and are tested end to end.'],
-      ai:['AI / ML','Applied models and AI-powered products with results the jury can measure.']
-    };
-    function setDom(k){
-      $$('.dom').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-dom')===k?'true':'false')});
-      $('#domDetail').textContent=doms[k][1];
-      $$('#projPrizes .dn').forEach(function(s){s.textContent=doms[k][0]});
-    }
-    $$('.dom').forEach(function(b){b.addEventListener('click',function(){setDom(b.getAttribute('data-dom'))})});
+    var ok=/^https:\/\//.test(RULEBOOK_URL);
+    $$('.js-rulebook').forEach(function(a){
+      if(ok){a.href=RULEBOOK_URL;a.target='_blank';a.rel='noopener noreferrer'}
+      else a.addEventListener('click',function(e){e.preventDefault();toast('Rulebook link will be added soon.')});
+    });
   });
 
   /* ---------- Google Form links ---------- */
